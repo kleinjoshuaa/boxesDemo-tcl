@@ -1,3 +1,5 @@
 # boxesDemo-tcl
 
-The boxes demo re-implemented in Tcl, using the Split Evaluator to make calls to track and getTreatment as there is no Split SDK for Tcl
+The boxes demo re-implemented in Tcl, using the Split Evaluator to make calls to track and getTreatment as there is no Split SDK for Tcl. 
+
+Make sure to set your URL and Auth Keys in the [evaluator.tcl](evaluator.tcl) file for this to correctly call out to your split evaluator
