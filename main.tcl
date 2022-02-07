@@ -75,7 +75,7 @@ proc buildTable {table splitName eventName} {
             set attributes [dict create row "\"[lindex [split [dict get $rowElem user] {}] 0]\"" col "\"[lindex [split [dict get $rowElem user] {}] 1]\"" userid "\"[dict get $rowElem user]\"" account "\"[dict get $rowElem account]\""]
 
             set splitResult [getTreatmentWithConfig $splitName [dict get $rowElem user] $authKey $attributes]
-            after 5 #being kind to the server here as not to flood it
+            #after 5 #being kind to the server here as not to flood it
             set configs  [dict create popup_value "" popup_message "coming soon" font_size "medium"]
 
             
@@ -139,13 +139,17 @@ proc wapp-page-login {} {
   global demo
   global table
   set params [dict create {*}[string map {= " " & " "} [wapp-param CONTENT]]]
- 
-  if {[dict exists $params eventName]} {
-    set htmlTable [buildTable $table [dict get $params splitName] [dict get $params eventName]]
+  set cookies [dict create {*}[string map {= " " ; " "} [wapp-param HTTP_COOKIE]]]
+
+  if {[dict exists $cookies splitname] && [dict get $cookies splitname] ne "null"} {
+    set htmlTable [buildTable $table [dict get $cookies splitname] [dict get $cookies event]]
   } else {
-    set htmlTable [buildTable $table [dict get $params splitName] ""]
+    set htmlTable [buildTable $table [dict get $params splitName] [dict get $params eventName]]
   }
- 
+  if {[dict exists $params splitName] && [dict get $params splitName] ne "null"} {
+  wapp-set-cookie event [dict get $params eventName]
+  wapp-set-cookie splitname [dict get $params splitName]
+  }
   wapp-trim {
     %unsafe($header)
     %unsafe($demo)
