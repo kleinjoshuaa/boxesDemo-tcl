@@ -6,5 +6,7 @@ Make sure to set your URL and Auth Keys in the [evaluator.tcl](evaluator.tcl) fi
 
 Requires tcl 8.6 and the tcllib package on most Linux package managers
 
+Uses the [wapp](https://wapp.tcl.tk/home/doc/trunk/README.md) Tcl web application framework. 
 
 run with `wapp main.tcl`
+
